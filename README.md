@@ -15,4 +15,11 @@ std::string decimalToBinary(int decimal) {
     return binary;
 }
 
+// Function to convert decimal to hexadecimal
+std::string decimalToHexadecimal(int decimal) {
+    std::stringstream stream;
+    stream << std::hex << std::uppercase << decimal;
+    return stream.str();
+}
+
 
