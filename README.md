@@ -4,65 +4,43 @@
 #include <sstream>
 #include <iomanip>
 
-// Function to convert decimal to binary
-std::string decimalToBinary(int decimal) {
-    if (decimal == 0) return "0";
-    std::string binary;
-    while (decimal > 0) {
-        binary = (decimal % 2 ? "1" : "0") + binary;
-        decimal /= 2;
+// Converts a decimal number to its binary representation
+std::string decimalToBinaryString(int decimalNumber) {
+    if (decimalNumber == 0) return "0";
+    std::string binaryString;
+    while (decimalNumber > 0) {
+        binaryString = (decimalNumber % 2 ? "1" : "0") + binaryString;
+        decimalNumber /= 2;
     }
-    return binary;
+    return binaryString;
 }
 
-// Function to convert decimal to hexadecimal
-std::string decimalToHexadecimal(int decimal) {
-    std::stringstream stream;
-    stream << std::hex << std::uppercase << decimal;
-    return stream.str();
-}
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <iomanip>
-
-// Function to convert decimal to binary
-std::string decimalToBinary(int decimal) {
-    if (decimal == 0) return "0";
-    std::string binary;
-    while (decimal > 0) {
-        binary = (decimal % 2 ? "1" : "0") + binary;
-        decimal /= 2;
+// Converts a binary string to its decimal equivalent
+int binaryStringToDecimal(const std::string& binaryString) {
+    int decimalNumber = 0;
+    for (char bit : binaryString) {
+        decimalNumber = (decimalNumber << 1) | (bit - '0');
     }
-    return binary;
+    return decimalNumber;
 }
 
-// Function to convert binary to decimal
-int binaryToDecimal(const std::string& binary) {
-    int decimal = 0;
-    for (char bit : binary) {
-        decimal = (decimal << 1) | (bit - '0');
-    }
-    return decimal;
+// Converts a decimal number to its hexadecimal representation
+std::string decimalToHexString(int decimalNumber) {
+    std::stringstream hexStream;
+    hexStream << std::hex << std::uppercase << decimalNumber;
+    return hexStream.str();
 }
 
-// Function to convert decimal to hexadecimal
-std::string decimalToHexadecimal(int decimal) {
-    std::stringstream stream;
-    stream << std::hex << std::uppercase << decimal;
-    return stream.str();
-}
-
-// Function to convert hexadecimal to decimal
-int hexadecimalToDecimal(const std::string& hex) {
-    int decimal;
-    std::stringstream stream(hex);
-    stream >> std::hex >> decimal;
-    return decimal;
+// Converts a hexadecimal string to its decimal equivalent
+int hexStringToDecimal(const std::string& hexString) {
+    int decimalNumber;
+    std::stringstream hexStream(hexString);
+    hexStream >> std::hex >> decimalNumber;
+    return decimalNumber;
 }
 
 int main() {
-    int choice;
+    int menuChoice;
     do {
         std::cout << "Select an option:\n";
         std::cout << "1. Decimal to Binary\n";
@@ -71,48 +49,49 @@ int main() {
         std::cout << "4. Hexadecimal to Decimal\n";
         std::cout << "5. Exit\n";
         std::cout << "Enter your choice (1-5): ";
-        std::cin >> choice;
+        std::cin >> menuChoice;
 
-        switch (choice) {
+        switch (menuChoice) {
             case 1: {
-                int decimal;
+                int decimalNumber;
                 std::cout << "Enter a decimal number: ";
-                std::cin >> decimal;
-                std::cout << "Binary representation: " << decimalToBinary(decimal) << std::endl;
+                std::cin >> decimalNumber;
+                std::cout << "Binary representation: " << decimalToBinaryString(decimalNumber) << std::endl;
                 break;
             }
             case 2: {
-                std::string binary;
+                std::string binaryString;
                 std::cout << "Enter a binary number: ";
-                std::cin >> binary;
-                std::cout << "Decimal representation: " << binaryToDecimal(binary) << std::endl;
+                std::cin >> binaryString;
+                std::cout << "Decimal representation: " << binaryStringToDecimal(binaryString) << std::endl;
                 break;
             }
             case 3: {
-                int decimal;
+                int decimalNumber;
                 std::cout << "Enter a decimal number: ";
-                std::cin >> decimal;
-                std::cout << "Hexadecimal representation: " << decimalToHexadecimal(decimal) << std::endl;
+                std::cin >> decimalNumber;
+                std::cout << "Hexadecimal representation: " << decimalToHexString(decimalNumber) << std::endl;
                 break;
             }
             case 4: {
-                std::string hex;
+                std::string hexString;
                 std::cout << "Enter a hexadecimal number: ";
-                std::cin >> hex;
-                std::cout << "Decimal representation: " << hexadecimalToDecimal(hex) << std::endl;
+                std::cin >> hexString;
+                std::cout << "Decimal representation: " << hexStringToDecimal(hexString) << std::endl;
                 break;
             }
             case 5:
                 std::cout << "Exiting...\n";
                 break;
             default:
-                std::cout << "Invalid choice. Please select a number between 1 and 5.\n";
+                std::cout << "Invalid choice. Please enter a number between 1 and 5.\n";
                 break;
         }
-    } while (choice != 5);
+    } while (menuChoice != 5);
 
     return 0;
-} 
+}
+ 
  
 
 
